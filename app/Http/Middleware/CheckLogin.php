@@ -15,11 +15,13 @@ class CheckLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // dd('CheckLogin middleware is running');
-        if (!session()->has('user')) {
-            return redirect('/login')->withErrors('You must be logged in.');
+        // dd('CheckLogin middleware is running');   // Debug line to check if middleware is triggered
+
+        if (!session('user'))                       // Check if 'user' is not present in the session
+        {
+            return redirect('/login')->withErrors('You must be logged in.'); // Redirect to login with error
         }
 
-        return $next($request);
+        return $next($request);                     // Allow the request to proceed if user is logged in
     }
 }

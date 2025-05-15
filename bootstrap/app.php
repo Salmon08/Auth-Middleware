@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+         $middleware->alias([
+        'guest.session' => \App\Http\Middleware\RedirectIfLoggedin::class,  // Alias for middleware that redirects logged-in users away from login page
+    ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
